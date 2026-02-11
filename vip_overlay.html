@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>VIP Overlay</title>
+<style>
+body {
+  margin: 0;
+  background: #222; /* geçici koyu arka plan */
+  font-family: Arial, sans-serif;
+}
 
+#box {
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.8);
+  padding: 15px 20px;
+  border-radius: 12px;
+  color: white;
+  font-size: 22px;
+}
+
+#avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 15px;
+  background: #555;
+}
+</style>
+</head>
+<body>
+
+<div id="box">
+  <img id="avatar" src="https://i.pravatar.cc/150">
+  <div id="username">YÜKLENİYOR...</div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const username = params.get("username");
+const avatar = params.get("avatar");
+
+if (username) {
+  document.getElementById("username").innerText = username;
+}
+
+if (avatar) {
+  document.getElementById("avatar").src = avatar;
+}
+</script>
+
+</body>
+</html>
