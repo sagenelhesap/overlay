@@ -61,4 +61,25 @@ function showVIP(data) {
   if (!data) return;
 
   const box = document.getElementById("box");
-  const username = document.getEleme
+  const username = document.getElementById("username");
+  const avatar = document.getElementById("avatar");
+
+  username.innerText = data.userName || "VIP";
+  avatar.src = data.profilePicture || "";
+
+  box.style.display = "flex";
+}
+
+// TikFinity hazır olunca dinle
+window.addEventListener("message", (event) => {
+  if (!event.data) return;
+
+  // TikFinity payload yakala
+  if (event.data.type === "tiktok-gift") {
+    showVIP(event.data);
+  }
+});
+</script>
+
+</body>
+</html>
