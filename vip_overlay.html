@@ -1,9 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
-</head>
-<body style="margin:0; background:red; color:white; font-size:50px;">
-  OBS GÖRÜYOR MU?
-</body>
-</html>
+  <meta charset="UTF-8" />
+  <title>VIP Overlay</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    #box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.75);
+      padding: 25px 35px;
+      border-radius: 15px;
+      color: white;
+      display: none;
+      align-items: center;
+      gap: 15px;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    #avatar {
+      width: 80px;
+      height: 80px
