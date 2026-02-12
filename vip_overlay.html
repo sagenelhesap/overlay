@@ -1,91 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>VIP Overlay</title>
-<style>
-body {
-
-  <body style="background:black; color:white; font-size:40px;">
-  TEST GÖRÜNÜYOR MU?
-</body>
-
-  margin: 0;
-  background: transparent;
-  font-family: Arial, sans-serif;
-}
-
-#box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.75);
-  padding: 20px 30px;
-  border-radius: 15px;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  animation: fadeIn 0.4s ease-out;
-}
-
-#avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-#username {
-  font-size: 28px;
-  font-weight: bold;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translate(-50%, -55%); }
-  to   { opacity: 1; transform: translate(-50%, -50%); }
-}
-</style>
+  <meta charset="UTF-8">
 </head>
-
-<body>
-
-<div id="box" style="display:none;">
-  <img id="avatar" src="">
-  <div id="username"></div>
-</div>
-
-<script>
-/*
-  TikFinity, OBS Browser Source içine
-  canlı verileri "window.TikFinity" olarak verir
-*/
-
-function showVIP(data) {
-  if (!data) return;
-
-  const box = document.getElementById("box");
-  const username = document.getElementById("username");
-  const avatar = document.getElementById("avatar");
-
-  username.innerText = data.userName || "VIP";
-  avatar.src = data.profilePicture || "";
-
-  box.style.display = "flex";
-}
-
-// TikFinity hazır olunca dinle
-window.addEventListener("message", (event) => {
-  if (!event.data) return;
-
-  // TikFinity payload yakala
-  if (event.data.type === "tiktok-gift") {
-    showVIP(event.data);
-  }
-});
-</script>
-
+<body style="margin:0; background:red; color:white; font-size:50px;">
+  OBS GÖRÜYOR MU?
 </body>
 </html>
-
