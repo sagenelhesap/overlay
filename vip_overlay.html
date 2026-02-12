@@ -22,41 +22,43 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
+  animation: fadeIn 0.4s ease-out;
 }
 
 #avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 #username {
   font-size: 28px;
   font-weight: bold;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -55%); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
+}
 </style>
 </head>
 
 <body>
 
-<div id="box">
+<div id="box" style="display:none;">
   <img id="avatar" src="">
-  <div id="username">VIP GELDİ 🎉</div>
+  <div id="username"></div>
 </div>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const username = params.get("username");
-const avatar = params.get("avatar");
+/*
+  TikFinity, OBS Browser Source içine
+  canlı verileri "window.TikFinity" olarak verir
+*/
 
-if (username) {
-  document.getElementById("username").innerText = username;
-}
+function showVIP(data) {
+  if (!data) return;
 
-if (avatar) {
-  document.getElementById("avatar").src = avatar;
-}
-</script>
-
-</body>
-</html>
+  const box = document.getElementById("box");
+  const username = document.getEleme
