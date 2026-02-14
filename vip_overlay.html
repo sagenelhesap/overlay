@@ -17,10 +17,10 @@ body {
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.75);
-  padding: 20px 30px;
-  border-radius: 15px;
-  min-width: 320px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 22px 30px;
+  border-radius: 16px;
+  min-width: 360px;
   text-align: center;
 }
 
@@ -29,14 +29,73 @@ body {
   font-weight: bold;
 }
 
+#rank {
+  margin-top: 6px;
+  font-size: 20px;
+}
+
 #info {
-  margin-top: 10px;
+  margin-top: 8px;
   font-size: 18px;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 </style>
 </head>
 
 <body>
 
-<div id=
+<div id="box">
+  <div id="name">Yükleniyor...</div>
+  <div id="rank"></div>
+  <div id="info"></div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+// username hangi isimle gelirse gelsin yakala
+const username =
+  params.get("username") ||
+  params.get("user") ||
+  params.get("nickname");
+
+// GOOGLE SHEET ID (SENİN ID)
+const SHEET_ID = "1MNSNuTCGw2lrGXSW4sL0bXv-bnv6a52W82Nfg96dkqk";
+
+// SAYFA ADI
+const SHEET_URL = `https://opensheet.elk.sh/${SHEET_ID}/vip_list`;
+
+fetch(SHEET_URL)
+  .then(res => res.json())
+  .then(data => {
+
+    document.getElementById("name").innerText =
+      username || "Kullanıcı yok";
+
+    const user = data.find(u =>
+      u.username &&
+      username &&
+      u.username.toLowerCase() === username.toLowerCase()
+    );
+
+    if (user) {
+      document.getElementById("rank").innerText =
+        `${user.unvan} · ${user.seviye}`;
+
+      document.getElementById("info").innerText =
+        `${user.memleket} | ${user.meslek} | ${user.dogum}`;
+    } else {
+      document.getElementById("rank").innerText = "";
+      document.getElementById("info").innerText =
+        "Sheet’te kullanıcı bulunamadı";
+    }
+  })
+  .catch(error => {
+    document.getElementById("name").innerText = "HATA";
+    document.getElementById("info").innerText = "Sheet okunamadı";
+    console.error(error);
+  });
+</script>
+
+</body>
+</html>
