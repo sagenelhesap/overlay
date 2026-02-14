@@ -3,64 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <title>VIP Overlay</title>
-
 <style>
 body {
   margin: 0;
   background: transparent;
   font-family: Arial, sans-serif;
+  color: white;
 }
-
 #box {
   position: absolute;
-  top: 50%;
+  bottom: 80px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.75);
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
   padding: 20px 30px;
-  border-radius: 20px;
-  color: white;
-  display: none;
-  align-items: center;
-  gap: 15px;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 300px;
 }
-
-#avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-#username {
-  font-size: 28px;
+#name {
+  font-size: 26px;
   font-weight: bold;
+}
+#info {
+  margin-top: 8px;
+  font-size: 18px;
 }
 </style>
 </head>
-
 <body>
 
 <div id="box">
-  <img id="avatar">
-  <div id="username"></div>
+  <div id="name">Yükleniyor...</div>
+  <div id="info"></div>
 </div>
 
 <script>
-function getParam(name) {
-  return new URLSearchParams(window.location.search).get(name);
-}
+const params = new URLSearchParams(window.location.search);
+const username = params.get("username");
 
-const username = getParam("username") || "BİR VIP";
-const avatar = getParam("avatar") || "https://i.pravatar.cc/150";
+const SHEET_ID = "BURAYA_SHEET_ID_YAZ";
+const SHEET_URL = `https://opensheet.elk.sh/${SHEET_ID}/vip_list`;
 
-document.getElementById("username").innerText = username;
-document.getElementById("avatar").src = avatar;
-document.getElementById("box").style.display = "flex";
+fetch(SHEET_URL)
+  .then(res => res.json())
+  .then(data => {
+    const user = data.find(u => u.username?.toLowerCase() === username?.toLowerCase());
 
-setTimeout(() => {
-  document.getElementById("box").style.display = "none";
-}, 8000);
+    document.getElementById("name").innerText = username || "Bilinmeyen Kullanıcı";
+
+    if (user) {
+      document.getElementById("info").innerText =
+        `${user.memleket} | ${user.meslek} | ${user.dogum}`;
+    } else {
+      document.getElementById("info").innerText = "Bilgi bulunamadı";
+    }
+  });
 </script>
 
 </body>
