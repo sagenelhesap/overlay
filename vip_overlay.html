@@ -3,63 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <title>VIP Overlay</title>
+
 <style>
 body {
   margin: 0;
   background: transparent;
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
 }
+
 #box {
   position: absolute;
-  bottom: 80px;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.75);
   padding: 20px 30px;
-  border-radius: 12px;
+  border-radius: 15px;
+  min-width: 320px;
   text-align: center;
-  min-width: 300px;
 }
+
 #name {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: bold;
 }
+
 #info {
-  margin-top: 8px;
+  margin-top: 10px;
   font-size: 18px;
+  opacity: 0.9;
 }
 </style>
 </head>
+
 <body>
 
-<div id="box">
-  <div id="name">Yükleniyor...</div>
-  <div id="info"></div>
-</div>
-
-<script>
-const params = new URLSearchParams(window.location.search);
-const username = params.get("username");
-
-const SHEET_ID = "BURAYA_SHEET_ID_YAZ";
-const SHEET_URL = `https://opensheet.elk.sh/${SHEET_ID}/vip_list`;
-
-fetch(SHEET_URL)
-  .then(res => res.json())
-  .then(data => {
-    const user = data.find(u => u.username?.toLowerCase() === username?.toLowerCase());
-
-    document.getElementById("name").innerText = username || "Bilinmeyen Kullanıcı";
-
-    if (user) {
-      document.getElementById("info").innerText =
-        `${user.memleket} | ${user.meslek} | ${user.dogum}`;
-    } else {
-      document.getElementById("info").innerText = "Bilgi bulunamadı";
-    }
-  });
-</script>
-
-</body>
-</html>
+<div id=
